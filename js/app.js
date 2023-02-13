@@ -84,7 +84,7 @@ btnElement.addEventListener ('click', function(){
 
         bombArray.push(randomNumber)
 
-        console.log(bombArray)
+        // console.log(bombArray)
     }
     }
 
@@ -113,7 +113,7 @@ btnElement.addEventListener ('click', function(){
 
     // recupero gli elementi appena creati che hanno la classe "cell"
     const createdCells = document.querySelectorAll('.cell')
-    console.log(createdCells)
+    // console.log(createdCells)
 
     // creo una variabile che conti il n di punti
     let counter = 0
@@ -128,28 +128,43 @@ btnElement.addEventListener ('click', function(){
         // creo la funzione che al click mi mostri il background green
         cells.addEventListener ('click', function(){
 
-            // aggiungo + 1 al counter ogni volta che clicco su una cella
-            counter += 100
-
-            // stampo nell'HTML il valore di counter
-            counterElement.innerHTML = counter
-            
-            cells.style.backgroundColor = "#74E7B8"
-
-            // console.log(i + 1)
-
-
             // se pero la cella include una bomba il giocatore perde
             if (bombArray.includes(i + 1)) {
-
-                // cells.style.backgroundColor = "red"
-
-                alert(`You lose with ${counter - 100} points!`)
-
-                counterElement.innerHTML = 0
-
-                btnElement.click()
+                
+                for (let j = 0; j < createdCells.length; j++) {
+                    if (bombArray.includes(j + 1)) {
+                        createdCells[j].classList.add('cell-bomb')
+                    }
+                }
+                
+                alert(`YOU HITTED A BOMB! Your score is ${counter} points!`)
+                
+                setTimeout(() => {
+                    counterElement.innerHTML = 0
+                    location.reload()
+                }, 1000)
             }
+            else {
+                // aggiungo + 1 al counter ogni volta che clicco su una cella
+                counter += 1
+    
+                // stampo nell'HTML il valore di counter
+                counterElement.innerHTML = counter
+                
+                cells.classList.add('cell-no-bomb')
+
+                let cellsWithoutBomb = totalCell - bombArray.length
+
+                if (counter === cellsWithoutBomb ) {
+                    alert(`YOU ARE SO GOOD :)! Your score is ${counter} points!`)
+
+                    counterElement.innerHTML = 0
+
+                    btnElement.click()
+                }
+            }
+
+            cells.removeEventListener("click", arguments.callee);
         })
     }
 })

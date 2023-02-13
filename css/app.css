@@ -12,7 +12,6 @@ button {
     cursor: pointer;
     font-size: 3rem;
     color: white;
-    margin: 0 auto;
 }
 
 select {
@@ -43,7 +42,7 @@ button:hover {
 
 .main-title {
     font-size: 3rem;
-    color: plum;
+    color: black;
     text-align: center;
 }
 
@@ -58,7 +57,7 @@ button:hover {
 }
 
 .col {
-    flex-basis: auto;
+    flex-basis: calc(100% / 4);
 }
 
 .grid {
@@ -68,13 +67,27 @@ button:hover {
 
 .cell {
     aspect-ratio: 1;
-    border: 2px solid #2EB5D0;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: #2C6BAA;
-    font-weight: bold;
+    background-image: url(../img/wall2.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.cell-no-bomb {
+    aspect-ratio: 1;
+    background-image: url(../img/wall1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.cell-bomb {
+    aspect-ratio: 1;
+    background-image: url(../img/wall3.png);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .hidden {
@@ -88,4 +101,5 @@ button:hover {
     font-size: 2rem;
     color: white;
     font-weight: bold;
+    text-align: center;
 }
