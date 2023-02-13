@@ -80,3 +80,12 @@ button:hover {
 .hidden {
     display: none;
 }
+
+#counter {
+    padding: 1rem;
+    border: 1px solid black;
+    background-color: #2EB5D0;
+    font-size: 2rem;
+    color: white;
+    font-weight: bold;
+}

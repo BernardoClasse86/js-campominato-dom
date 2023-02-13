@@ -16,7 +16,7 @@ console.log('Campo minato')
 const gridElement = document.querySelector('.grid')
 // console.log(gridElement)
 
-// recupero la selct dall HTML
+// recupero la select dall HTML
 const selectElement = document.getElementById('difficulty')
 // console.log(selectElement)
 
@@ -24,21 +24,17 @@ const selectElement = document.getElementById('difficulty')
 const btnElement = document.getElementById('generateGrid')
 // console.log(btnElement)
 
+// recupero l'elemento counter dall HTML
+const counterElement = document.getElementById('counter')
+// console.log(counterElement)
+
 
 let cellElement
 
 //aggiungo al button la funzione che al click lo faccia sparire e generi al suo posto la griglia
 btnElement.addEventListener ('click', function(){
-
-    // creo un ciclo che ad ogni click ricrei la griglia
-    while (gridElement.firstChild) {
-
-        gridElement.removeChild(gridElement.firstChild)
-    }
-
     
     let generatingCell
-
     
     // assegno alla variabile difficultySelect il valore del select recuperato dall'HTML
         // creo una condizione che imposti la difficolta'
@@ -49,7 +45,7 @@ btnElement.addEventListener ('click', function(){
 
         generatingCell = 10
 
-        // invoco la funzione cosi da moltiplicare, in base alla difficolta' scelta, il n di celle per se stesso 
+        // invoco la funzione cosi da moltiplicare, in base alla   
         totalCell = cellGenerator(generatingCell)
     }
 
@@ -57,7 +53,7 @@ btnElement.addEventListener ('click', function(){
 
         generatingCell = 9
 
-        // invoco la funzione cosi da moltiplicare, in base alla difficolta' scelta, il n di celle per se stesso 
+        // invoco la funzione che moltiplica il numero inserito dall'utente per se stesso
         totalCell = cellGenerator(generatingCell)
     }
 
@@ -65,10 +61,15 @@ btnElement.addEventListener ('click', function(){
 
         generatingCell = 7
 
-        // invoco la funzione cosi da moltiplicare, in base alla difficolta' scelta, il n di celle per se stesso 
+        // invoco la funzione che moltiplica il numero inserito dall'utente per se stesso
         totalCell = cellGenerator(generatingCell)
     }
 
+
+    // creo un ciclo che ad ogni click ricrei la griglia
+    while (gridElement.firstChild) {
+        gridElement.removeChild(gridElement.firstChild);
+    }
 
     // creo un array vuoto nel quale inserisco dei numeri casuali fino ad un totale di 16
     let bombArray = []
@@ -86,7 +87,6 @@ btnElement.addEventListener ('click', function(){
         console.log(bombArray)
     }
     }
-
 
     // creo un ciclo che a sua volta crei un elemento 'div' per ogni iterazione che effettura in base al risultato di totalCell
     for (let i = 0; i < totalCell; i++) {
@@ -113,7 +113,10 @@ btnElement.addEventListener ('click', function(){
 
     // recupero gli elementi appena creati che hanno la classe "cell"
     const createdCells = document.querySelectorAll('.cell')
-    // console.log(createdCells)
+    console.log(createdCells)
+
+    // creo una variabile che conti il n di punti
+    let counter = 0
 
     // creo un ciclo nel quale poi creero una funzione che ad ogni click assegni un background alla cella
         // se pero la cella include una bomba il giocatore perde
@@ -125,14 +128,25 @@ btnElement.addEventListener ('click', function(){
         // creo la funzione che al click mi mostri il background green
         cells.addEventListener ('click', function(){
 
-            console.log(i + 1)
+            // aggiungo + 1 al counter ogni volta che clicco su una cella
+            counter += 100
 
+            // stampo nell'HTML il valore di counter
+            counterElement.innerHTML = counter
+            
             cells.style.backgroundColor = "#74E7B8"
+
+            // console.log(i + 1)
+
 
             // se pero la cella include una bomba il giocatore perde
             if (bombArray.includes(i + 1)) {
 
-                alert("You lose!")
+                // cells.style.backgroundColor = "red"
+
+                alert(`You lose with ${counter - 100} points!`)
+
+                counterElement.innerHTML = 0
 
                 btnElement.click()
             }
